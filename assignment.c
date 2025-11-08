@@ -14,35 +14,40 @@ typedef struct SinhVien SinhVien;
 
 
 SinhVien nhap(SinhVien x){
-	printf("nhap ma sv: ");
+	printf("Enter student ID: ");
 	gets(x.masv);
-	printf("nhap ho sv: ");
+	printf("Enter student's lastname: ");
 	gets(x.ho);
-	printf("nhap ten sv: ");
+	printf("Enter student's firstname: ");
 	gets(x.ten);
-	printf("nhap gioi tinh sv: ");
+	printf("Enter gender(male/female): ");
 	gets(x.sex);
-	printf("nhap diem tong ket: ");
+	printf("Enter GPA: ");
 	scanf("%lf%*c",&x.diem);
+	while(x.diem<0 || x.diem>10){
+		printf("Invalid value! Please try again\n");
+		printf("Enter GPA: ");
+		scanf("%lf%*c",&x.diem);
+	}
 	return x;
 }
 
 
 void Nhapds(SinhVien a[],int*n){
 	if(*n==0){
-	printf("Nhap so luong sinh vien them vao: ");
+	printf("Enter number of students to add: ");
 	scanf("%d%*c",&*n);
 	for(int i=0;i<*n;i++){
-		printf("Sinh vien thu %d: \n",i+1);
+		printf("Student %d: \n",i+1);
 		a[i]=nhap(a[i]);
 	}
 }
 	else{
 		int add;
-		printf("Nhap so luong sinh vien them vao: ");
+		printf("Enter number of students to add: ");
 		scanf("%d%*c",&add);
 		for(int i=*n;i<(*n)+add;i++){
-			printf("Sinh vien thu %d: \n",i+1);
+			printf("Student %d: \n",i+1);
 			a[i]=nhap(a[i]);
 		}
 		*n=*n+add;
@@ -51,18 +56,18 @@ void Nhapds(SinhVien a[],int*n){
 
 
 void Xuatds(SinhVien a[],int n){
-	printf("-----------------------------------------------------------------\n");
-	printf("%-20s %-10s %-15s %-10s %-5s","MSV","HO","TEN","GIOITINH","DIEM");
-	printf("\n-----------------------------------------------------------------\n");
+	printf("--------------------------------------------------\n");
+	printf("%-10s %-10s %-10s %-10s %-5s","ID","LASTNAME","FIRSTNAME","GENDER","GPA");
+	printf("\n--------------------------------------------------\n");
 	for(int i=0;i<n;i++){
-		printf("%-20s %-10s %-15s %-10s %-5.2lf\n",a[i].masv,a[i].ho,a[i].ten,a[i].sex,a[i].diem);
+		printf("%-10s %-10s %-10s %-10s %-5.2lf\n",a[i].masv,a[i].ho,a[i].ten,a[i].sex,a[i].diem);
 	}
 }
 
 
 int timsvtheoma(SinhVien a[],int n){
 	char ma[20];
-	printf("Nhap ma sv can tim: ");
+	printf("Enter student's ID to find: ");
 	gets(ma);
 	int i;
 	int c=2055;
@@ -78,54 +83,55 @@ int timsvtheoma(SinhVien a[],int n){
 
 void suadiem(SinhVien a[],int n){
 	int b=timsvtheoma(a,n);
-	if(b==2055) printf("Ma sv khong hop le\n");
+	if(b==2055) printf("Invalid student ID\n");
 	else{
-		printf("-----------------------------------------------------------------\n");
-		printf("%-20s %-10s %-15s %-10s %-5s","MSV","HO","TEN","GIOITINH","DIEM");
-		printf("\n-----------------------------------------------------------------\n");
-		printf("%-20s %-10s %-15s %-10s %-5.2lf\n",a[b].masv,a[b].ho,a[b].ten,a[b].sex,a[b].diem);
-		printf("Nhap diem moi: ");
+		printf("--------------------------------------------------\n");
+		printf("%-10s %-10s %-10s %-10s %-5s","ID","LASTNAME","FIRSTNAME","GENDER","GPA");
+		printf("\n--------------------------------------------------\n");
+		printf("%-10s %-10s %-10s %-10s %-5.2lf\n",a[b].masv,a[b].ho,a[b].ten,a[b].sex,a[b].diem);
+		printf("Enter new GPA: ");
 		scanf("%lf%*c",&a[b].diem);
-		printf("Thanh cong");
+		printf("Updated successfully");
 	}
 }
 
 
 void suahoten(SinhVien a[],int n){
 	int b=timsvtheoma(a,n);
-	if(b==2055) printf("Ma sv khong hop le\n");
+	if(b==2055) printf("Invalid student ID\n");
 	else{
-		printf("-----------------------------------------------------------------\n");
-		printf("%-20s %-10s %-15s %-10s %-5s","MSV","HO","TEN","GIOITINH","DIEM");
-		printf("\n-----------------------------------------------------------------\n");
-		printf("%-20s %-10s %-15s %-10s %-5.2lf\n",a[b].masv,a[b].ho,a[b].ten,a[b].sex,a[b].diem);
-		printf("Nhap ho moi: ");
+		printf("--------------------------------------------------\n");
+		printf("%-10s %-10s %-10s %-10s %-5s","ID","LASTNAME","FIRSTNAME","GENDER","GPA");
+		printf("\n--------------------------------------------------\n");
+		printf("%-10s %-10s %-10s %-10s %-5.2lf\n",a[b].masv,a[b].ho,a[b].ten,a[b].sex,a[b].diem);
+		printf("Enter new lastname: ");
 		gets(a[b].ho);
-		printf("Nhap ten moi: ");
+		printf("Enter new firstname: ");
 		gets(a[b].ten);
-		printf("Thanh cong");
+		printf("Updated successfully");
 	}
 }
 
 
 void xoattin(SinhVien a[],int *n){
 	int b=timsvtheoma(a ,*n);
-	if(b==2055) printf("Ma sv khong hop le\n");
+	if(b==2055) printf("Invalid student ID\n");
 	else{
-		printf("-----------------------------------------------------------------\n");
-		printf("%-20s %-10s %-15s %-10s %-5s","MSV","HO","TEN","GIOITINH","DIEM");
-		printf("\n-----------------------------------------------------------------\n");
-		printf("%-20s %-10s %-15s %-10s %-5.2lf\n",a[b].masv,a[b].ho,a[b].ten,a[b].sex,a[b].diem);
-		printf("Xac nhan xoa\nYes: nhap 1\nNo: nhap 2\n");
+		printf("--------------------------------------------------\n");
+		printf("%-10s %-10s %-10s %-10s %-5s","ID","LASTNAME","FIRSTNAME","GENDER","GPA");
+		printf("\n--------------------------------------------------\n");
+		printf("%-10s %-10s %-10s %-10s %-5.2lf\n",a[b].masv,a[b].ho,a[b].ten,a[b].sex,a[b].diem);
+		printf("Confirm delete?\nYes: 1\nNo: 2\n");
 		int c;
 		scanf("%d%*c",&c);
 		if(c==1){
 			for(int i=b;i<*n-1;i++){
 				a[i]=a[i+1];
 			}
+			(*n)--;
+			printf("Deleted successfully");
 		}
-		(*n)--;
-		printf("Thanh cong");
+		else printf("Canceled successfully");
 	}
 }
 
@@ -178,36 +184,48 @@ void xuattheoma(SinhVien a[],int n){
 
 
 void select(SinhVien a[],int n,float i,float j){
-	qsort(a,n,sizeof(SinhVien),cmpdiemtang);
-	printf("-----------------------------------------------------------------\n");
-	printf("%-20s %-10s %-15s %-10s %-5s","MSV","HO","TEN","GIOITINH","DIEM");
-	printf("\n-----------------------------------------------------------------\n");
-	for(int d=0;d<n;d++){
-		if(a[d].diem>=i && a[d].diem<=j){
-			printf("%-20s %-10s %-15s %-10s %-5.2lf\n",a[d].masv,a[d].ho,a[d].ten,a[d].sex,a[d].diem);
+	float s[n];
+	for(int t;t<n;t++){
+		s[t]=a[t].diem;
+	}
+	qsort(s,n,sizeof(float),cmpdiemtang);
+	printf("--------------------------------------------------\n");
+	printf("%-10s %-10s %-10s %-10s %-5s","ID","LASTNAME","FIRSTNAME","GENDER","GPA");
+	printf("\n--------------------------------------------------\n");
+	for(int c=0;c<n;c++){
+		if(s[c]>=i &&s[c]<=j){
+			for(int v=0;v<n;v++){
+				if(a[v].diem == s[c]){
+			printf("%-10s %-10s %-10s %-10s %-5.2lf\n",a[v].masv,a[v].ho,a[v].ten,a[v].sex,a[v].diem);
 		}
 	}
+	}
+}
 }
 
 
 void xuattheodiemtrongkhoang(SinhVien a[],int n){
 	float i,j;
-	printf("Nhap khoang diem: ");
+	printf("Enter GPA range (min max): ");
 	scanf("%f%f",&i,&j);
 	select(a,n,i,j);
 }
 
 void xuatdiemtbmaxmin(SinhVien a[],int n){
 	float tong=0;
-	qsort(a,n,sizeof(SinhVien),cmpdiemgiam);
+	float s[n];
+	for(int i;i<n;i++){
+		s[i]=a[i].diem;
+	}
+	qsort(s,n,sizeof(float),cmpdiemtang);
 	for(int i=0;i<n;i++){
 		tong=tong + a[i].diem;
 	}
-	float max=a[0].diem;
-	float min=a[n-1].diem;
-	printf("Diem cao nhat la: %.2f",max);
-	printf("\nDiem trung binh la: %.2f",tong/n);
-	printf("\nDiem thap nhat la: %.2f",min);
+	float max=s[n-1];
+	float min=s[0];
+	printf("Highest GPA: %.2f",max);
+	printf("\nAverage GPA: %.2f",tong/n);
+	printf("\nLowest GPA: %.2f",min);
 }
 int main() {
     system("cls");
@@ -220,83 +238,83 @@ int main() {
     //@STUDENT: WRITE YOUR OUTPUT HERE
     do {
         printf("\n==================Menu==================\n");
-        printf("1.Nhap thong tin sinh vien them vao\n");
-        printf("2.Sua diem tong ket\n");
-        printf("3.Sua ho va ten\n");
-        printf("4.Xoa sinh vien\n");
-        printf("5.Sap xep giam dan theo diem\n");
-        printf("6.Sap xep tang dan theo ten\n");
-        printf("7.Xuat danh sach\n");
-        printf("8.Xuat sinh vien theo ma\n");
-        printf("9.Xuat theo khoang diem\n");
-        printf("10.Xuat theo diem trung binh, max va min\n");
-        printf("0.Thoat\n");
+        printf("1.Add students\n");
+        printf("2.Edit GPA\n");
+        printf("3.Edit name\n");
+        printf("4.Delete student\n");
+        printf("5.Sort by GPA (descending)\n");
+        printf("6.Sort by name (ascending)\n");
+        printf("7.Print list\n");
+        printf("8.Print students sorted by ID\n");
+        printf("9.Print students within GPA range\n");
+        printf("10.Print GPA statistics (avg, max, min)\n");
+        printf("0.Exit\n");
         printf("==========================================\n");
-        printf("Nhap yeu cau: ");
-        scanf("%d%*c", &choice);
+        printf("Enter your choice: ");
+        scanf("%d%*c",&choice);
         switch(choice){
             case 1:
 				Nhapds(a,&n);
 				break;
             case 2:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				suadiem(a,n); 
 				break;
             case 3:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				suahoten(a,n);
 				 break;
             case 4:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				xoattin(a,&n);
 				break;
             case 5:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				sapxeptheodiemgiam(a,n); 
 				break;
             case 6:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				sapxeptheoten(a,n); 
 				break;
             case 7:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				Xuatds(a,n);
 				break;
             case 8:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				xuattheoma(a,n); 
 				break;
             case 9:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				xuattheodiemtrongkhoang(a,n);
 				break;
             case 10:
             	if(n==0){
-    				printf("Danh sach sinh vien trong");
+    				printf("The student list is empty");
     				break;
 				}
 				xuatdiemtbmaxmin(a,n);
@@ -305,7 +323,7 @@ int main() {
 				printf("Goodbye\n"); 
 				break;
             default:
-				printf("Vui long chon lai\n");
+				printf("Invalid choice! Please try again\n");
 				break;
         }
     } while (choice != 0);
@@ -319,3 +337,5 @@ int main() {
     system("pause");
     return(0);
 }
+
+
