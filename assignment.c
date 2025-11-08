@@ -13,9 +13,24 @@ struct SinhVien{
 typedef struct SinhVien SinhVien;
 
 
-SinhVien nhap(SinhVien x){
+SinhVien nhap(SinhVien x,SinhVien a[],int n){
 	printf("Enter student ID: ");
 	gets(x.masv);
+	int test=1;
+	if(n>0){
+	while(test==1){
+	for(int i=0;i<n;i++){
+		test=0;
+		if(strcmp(x.masv,a[i].masv)==0){
+			printf("Student ID already exists! Please try again\n");
+				printf("Enter student ID: ");
+				gets(x.masv);
+				test=1;
+				break;
+			}
+		}
+	}
+}
 	printf("Enter student's lastname: ");
 	gets(x.ho);
 	printf("Enter student's firstname: ");
@@ -39,7 +54,7 @@ void Nhapds(SinhVien a[],int*n){
 	scanf("%d%*c",&*n);
 	for(int i=0;i<*n;i++){
 		printf("Student %d: \n",i+1);
-		a[i]=nhap(a[i]);
+		a[i]=nhap(a[i],a,i);
 	}
 }
 	else{
@@ -48,7 +63,7 @@ void Nhapds(SinhVien a[],int*n){
 		scanf("%d%*c",&add);
 		for(int i=*n;i<(*n)+add;i++){
 			printf("Student %d: \n",i+1);
-			a[i]=nhap(a[i]);
+			a[i]=nhap(a[i],a,i);
 		}
 		*n=*n+add;
 	}
